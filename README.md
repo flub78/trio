@@ -5,6 +5,35 @@ adaptation française du petit jeu japonais *Nana*. Le but est de deviner où se
 cachent les 3 cartes portant le même numéro, qu'elles soient dans la main des
 adversaires ou parmi les cartes posées sur la table.
 
+Ce dépôt contient une implémentation web (HTML/CSS/JavaScript, sans
+dépendance) du **mode Simple**, jouable localement avec un mélange libre de
+joueurs humains (en pass-and-play sur un même écran) et de joueurs IA, de 3 à
+6 joueurs. Voir `docs/PRD.md` pour la description fonctionnelle complète et
+`docs/DESIGN.md` pour l'architecture.
+
+## Lancer l'application
+
+Le JavaScript est chargé en modules ES natifs : ouvrir directement
+`index.html` en `file://` ne fonctionne pas (restriction des navigateurs sur
+les modules). Servir le dossier via un petit serveur HTTP local, par exemple :
+
+```sh
+python3 -m http.server 8765
+```
+
+puis ouvrir `http://localhost:8765/` dans un navigateur.
+
+## Structure du projet
+
+- `index.html`, `style.css` — page et mise en forme.
+- `game.js` — logique pure du jeu (distribution, tours, fin de partie),
+  sans dépendance au DOM.
+- `ai.js` — décision des joueurs IA (ne reçoit jamais l'état complet de la
+  partie, uniquement la main du joueur IA et l'information déjà révélée
+  publiquement).
+- `ui.js` — rendu à l'écran et orchestration des tours.
+- `main.js` — point d'entrée.
+
 ## Informations pratiques
 
 - **Joueurs** : 3 à 6

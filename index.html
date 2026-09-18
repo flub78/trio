@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="app-header">
+  <h1>Trio</h1>
+  <button id="rules-btn" class="link-btn" type="button">Règles du jeu</button>
+</header>
+
+<main id="app"></main>
+
+<div id="rules-modal" class="modal hidden">
+  <div class="modal-content">
+    <button id="rules-close" class="modal-close" type="button" aria-label="Fermer">&times;</button>
+    <h2>Règles du Trio</h2>
+    <p>Le but est de deviner où se cachent les 3 cartes portant le même numéro,
+       qu'elles soient dans la main des adversaires ou sur les piles de la table.</p>
+    <h3>Mise en place</h3>
+    <p>Les cartes sont distribuées face cachée. Chaque joueur regarde sa main en
+       privé et la voit triée de la plus petite à la plus grande valeur. Les
+       cartes restantes forment des piles face cachée au centre de la table.</p>
+    <h3>Déroulement d'un tour</h3>
+    <p>Le joueur actif révèle des cartes une à une, en ne pouvant choisir que
+       des cartes accessibles : les deux extrémités de chaque main, ou le
+       dessus de chaque pile de la table.</p>
+    <ul>
+      <li>Il doit s'arrêter dès que deux numéros révélés sont différents.</li>
+      <li>S'ils correspondent, il continue jusqu'à révéler trois cartes
+          identiques (un trio complet), qu'il remporte alors.</li>
+      <li>Après un trio remporté, le joueur rejoue.</li>
+    </ul>
+    <h3>Victoire (mode Simple)</h3>
+    <p>Le premier joueur à remporter 3 trios (n'importe lesquels) ou le trio de
+       7 gagne la partie.</p>
+  </div>
+</div>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>
