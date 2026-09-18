@@ -23,6 +23,37 @@ python3 -m http.server 8765
 
 puis ouvrir `http://localhost:8765/` dans un navigateur.
 
+## Déploiement (hébergement statique)
+
+L'application est 100 % statique (aucun backend, aucun build) : la
+déployer revient à copier les fichiers dans le dossier web d'un domaine.
+Exemple avec un serveur disposant du panneau **Hestia Control Panel**
+(fonctionne à l'identique sur tout hébergement statique) :
+
+1. **Créer le domaine dans Hestia** (si ce n'est pas déjà fait) : panneau
+   Hestia → **Web** → *Add Web Domain*. Cela crée le dossier
+   `~/web/<domaine>/public_html/`.
+2. **Déployer les fichiers** — le plus simple, via un accès SSH au
+   serveur :
+   ```sh
+   ssh <utilisateur-hestia>@<ip-du-serveur>
+   cd ~/web/<domaine>/public_html
+   rm -f index.html                     # supprime la page par défaut de Hestia
+   git clone https://github.com/flub78/trio.git .
+   ```
+   Pour les mises à jour futures, un simple `git pull` dans ce dossier
+   suffit. Sans accès SSH : SFTP avec les identifiants du compte web créé
+   par Hestia (visibles dans les détails du domaine), via FileZilla ou
+   `scp -r`.
+3. **Activer HTTPS** : onglet **SSL** du domaine → *Let's Encrypt* (gratuit,
+   un clic). Recommandé, même si l'application fonctionne aussi en HTTP
+   simple dès lors qu'elle est servie par un vrai serveur web (pas de
+   restriction `file://`, contrairement à un usage local direct).
+
+Aucune autre configuration n'est nécessaire : Apache/Nginx servent déjà les
+`.js`/`.html`/`.css` avec les bons types MIME par défaut, sans règle
+`.htaccess` particulière pour des modules ES en statique.
+
 ## Structure du projet
 
 - `index.html`, `style.css` — page et mise en forme.
